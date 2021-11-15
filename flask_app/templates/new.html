@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Recipe</title>
+</head>
+
+<body>
+    <div>
+        <h1>New Recipes</h1>
+        <td>| <a href="dashboard/{{dashboard.id}}">dashboard</a> | | <a href="delete/{{recipe.id}}">logout</a> |</td>
+    </div>
+    <div>
+        <h3>Name</h3>
+        <textarea name="name" id="name" cols="45" rows="1"></textarea>
+        <h3>Description</h3>
+        <textarea name="description" id="description" cols="45" rows="4"></textarea>
+        <h3>Instructions</h3>
+        <textarea name="instructions" id="instructions" cols="45" rows="10"></textarea>
+        <button>Create</button>
+        <div>
+
+        <h3>Date Created On:</h3>
+        <label for="start">Start date:</label>
+
+        <input type="date" id="start" name="startDate"
+                value="0000/00/00"
+                min="2000-01-01" max="2222-12-31">
+        <h3>Under 30 Minutes?</h3>
+        <input type="radio" id="yes" name="under30" value="yes">
+        <label for="yes">yes</label><br>
+        <input type="radio" id="no" name="under30" value="no">
+        <label for="no">no</label><br>
+        </div>
+    </div>
+</body>
+
+</html>
