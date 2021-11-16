@@ -26,7 +26,7 @@ class User:
         return Users
 
     @classmethod
-    def get_one(cls, data:dict):
+    def get_user_by_id(cls, data:dict):
         query = "SELECT * FROM users WHERE id=%(id)s;"
         results = connectToMySQL("recipes").query_db(query, data)
         if not results:

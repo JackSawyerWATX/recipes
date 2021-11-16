@@ -1,5 +1,7 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models import user
+from flask import flash
 DATABASE = 'recipes' 
 # model the class after the user table from our database
 class Recipe:
@@ -7,21 +9,34 @@ class Recipe:
         self.id = data['id']
         self.name = data['name']
         self.description = data['description']
-        self.under_30_minutes = data['under_30_minutes']
         self.instructions = data['instructions']
+        self.date = data['date']
+        self.time = data['time']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.updated_at = data['user_id']
     # Now we use class methods to query our database
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM recipes;"
+        query = "SELECT * FROM recipes JOIN users ON users.id = users_id;"
         results = connectToMySQL(DATABASE).query_db(query)
-        Users = []
-        for user in results:
-            Users.append( cls(user) )
-        return Users
+        recipes = []
+        for row in results:
+            recipe = cls (row)
+            user_data = {
+                "id": row["users.id"],
+                "first_name": row["first_name"],
+                "last_name": row["last_name"],
+                "email": row["email"],
+                "password": row["password"],
+                "created_at": row["users.created_at"],
+                "updated_at": row["users.updated_at"],
+            }
+            recipe.creator=user.User(user_data)
+            recipes.append(recipe)
+        return recipes
+        # this is when there is a one-to-many relationship
+        # when associating from the many side to to one side.
 
     @classmethod
     def get_one(cls, data:dict):
@@ -48,3 +63,22 @@ class Recipe:
     def delete_one(cls,data):
         query  = "DELETE FROM recipes WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query,data)
+
+    @classmethod
+    def save_one(cls,data):
+        query = "INSERT into recipes (name,description,instructions,date,time,users_id) VALUES(%(name)s,%(description)s,%(instructions)s,%(date)s,%(time)s,%(users_id)s)"
+        return connectToMySQL("recipes").query_db(query,data)
+
+    @staticmethod
+    def validate_recipe(form):
+        is_valid = True
+        if len(form["name"]) < 3:
+            flash("Name required! At least 3 Characters")
+            is_valid = False
+        if len(form["description"]) < 3:
+            flash("Description needed! At least 3 Characters")
+            is_valid = False
+        if len(form["instructions"]) < 3:
+            flash("Instructions needed! At least 3 Characters")
+            is_valid = False
+        return is_valid

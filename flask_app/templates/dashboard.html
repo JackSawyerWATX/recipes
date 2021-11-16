@@ -13,6 +13,7 @@
 <body>
     <div>
         <h2>These Are Your Recipes:</h2>
+        <h2>Hello {{user.first_name}}</h2>
     </div>
     <table class="table">
         <thead>
@@ -23,12 +24,13 @@
             </tr>
         </thead>
         <tbody>
+            <a href="/recipes/new">create</a>
             {%for recipe in all_recipes %}
             <tr>
                 <th scope="row">{{recipe.id}}</th>
                 <td>{{recipe.under30}}</td>
-                <!-- <td><a href="recipe/{{recipe.id}}">View Recipe</a>|<a href="edit/{{recipe.id}}">Edit</a>|<a
-                        href="delete/{{recipe.id}}"></a></td> -->
+                <td><a href="/recipe/{{recipe.id}}">View Recipe</a>|<a href="/recipes/edit/{{recipe.id}}">Edit</a>|<a
+                        href="delete/{{recipe.id}}"></a></td>
             </tr>
             {%endfor%}
         </tbody>

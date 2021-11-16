@@ -11,7 +11,7 @@
 <body>
     <div>
         <h1>Edit Recipe</h1>
-        <td>| <a href="dashboard/{{dashboard.id}}">dashboard</a> | | <a href="delete/{{recipe.id}}">logout</a> |</td>
+        <td>| <a href="/dashboard">dashboard</a> | | <a href="/logout">logout</a> |</td>
     </div>
     <div>
         <h3>Name</h3>
@@ -20,19 +20,19 @@
         <textarea name="description" id="description" cols="45" rows="4"></textarea>
         <h3>Instructions</h3>
         <textarea name="instructions" id="instructions" cols="45" rows="10"></textarea>
-        <button>Edit</button>
+        
         <div>
 
         <h3>Date Created On:</h3>
         <label for="start">Start date:</label>
 
-        <input type="date" id="start" name="startDate"
+        <input type="date" id="start" name="date"
                 value="0000/00/00"
                 min="2000-01-01" max="2222-12-31">
         <h3>Under 30 Minutes?</h3>
-        <input type="radio" id="yes" name="under30" value="yes">
+        <input type="radio" id="yes" name="time" value="yes">
         <label for="yes">yes</label><br>
-        <input type="radio" id="no" name="under30" value="no">
+        <input type="radio" id="no" name="time" value="no">
         <label for="no">no</label><br>
         </div>
     </div>

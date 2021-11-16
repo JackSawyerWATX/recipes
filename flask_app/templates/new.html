@@ -11,31 +11,41 @@
 <body>
     <div>
         <h1>New Recipes</h1>
-        <td>| <a href="dashboard/{{dashboard.id}}">dashboard</a> | | <a href="delete/{{recipe.id}}">logout</a> |</td>
+        <a href="/dashboard">dashboard</a>
     </div>
     <div>
         <h3>Name</h3>
+        <form action="/recipes/create" method="post">
         <textarea name="name" id="name" cols="45" rows="1"></textarea>
         <h3>Description</h3>
         <textarea name="description" id="description" cols="45" rows="4"></textarea>
         <h3>Instructions</h3>
         <textarea name="instructions" id="instructions" cols="45" rows="10"></textarea>
-        <button>Create</button>
         <div>
 
         <h3>Date Created On:</h3>
-        <label for="start">Start date:</label>
+        <label for="date">Start date:</label>
 
-        <input type="date" id="start" name="startDate"
+        <input type="date" id="date" name="date"
                 value="0000/00/00"
                 min="2000-01-01" max="2222-12-31">
         <h3>Under 30 Minutes?</h3>
-        <input type="radio" id="yes" name="under30" value="yes">
+        <input type="radio" id="yes" name="time" value="yes">
         <label for="yes">yes</label><br>
-        <input type="radio" id="no" name="under30" value="no">
+        <input type="radio" id="no" name="time" value="no">
         <label for="no">no</label><br>
+        <button type="submit">Create</button>
+    </form>
         </div>
     </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color:red">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
 </body>
 
 </html>

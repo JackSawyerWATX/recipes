@@ -45,19 +45,7 @@ def login_user():
             flash("Invalid Email/Password")
             return redirect("/login")
         session["user_id"] = user_db.id
-        session["first_name"] = user_db.first_name
+        # session["first_name"] = user_db.first_name
         return redirect("/dashboard")
     else:
         return redirect("/login")
-
-@app.route('/dashboard')
-def secondpage():
-    return render_template('dashboard.html')
-
-@app.route('/recipe/<int:id>')
-def thirdpage():
-    data={
-        "id":id
-    }
-    recipe = Recipe.get_one(data)
-    return render_template('recipe.html',recipe=recipe)
